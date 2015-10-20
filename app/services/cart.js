@@ -23,5 +23,19 @@ export default Ember.Service.extend({
     items = JSON.stringify(items);
     window.localStorage.setItem(env.APP.cartKey, items);
     return item;
+  },
+
+  all() {
+    var items = window.localStorage.getItem(env.APP.cartKey);
+
+    if (items) {
+      items = JSON.parse(items);
+
+      return Object.keys(items).map((key) => {
+        return items[key];
+      });
+    }
+
+    return [];
   }
 });
